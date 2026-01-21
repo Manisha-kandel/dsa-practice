@@ -16,3 +16,20 @@ class Solution(object):
             i = i + 1
             j = j + 1
         return False
+
+#REVISION
+'''
+217. Contains Duplicate
+time, memory beats 70%,27%
+'''
+
+
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        hashset = set()
+        for i in nums:
+            if i in hashset:
+                return True
+            else:
+                hashset.add(i)
+        return False

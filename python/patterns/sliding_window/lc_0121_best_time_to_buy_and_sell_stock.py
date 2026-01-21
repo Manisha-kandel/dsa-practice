@@ -24,3 +24,29 @@ class Solution(object):
                     profit = gain                #4,6                         
                 j = j + 1                #3   
         return profit
+
+#REVISION
+'''
+121. Best time to buy and sell stock
+time memory beats 20%ish
+'''
+
+
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        i = 0
+        j = 1
+        profit = 0
+
+        while (j <= len(prices)-1) and (i <= len(prices)-1):
+            sell = prices[j]
+            buy = prices[i]
+            if sell < buy: 
+                i = j              #this is the core logic of update, stuck here for quite some time cause I did j = i + 1 instead of i = j
+                j = j + 1
+            else: # sell >= buy:
+                gain = sell - buy
+                profit = max(profit, gain)
+                j = j + 1
+        return profit
+

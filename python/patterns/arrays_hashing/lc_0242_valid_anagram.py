@@ -38,3 +38,29 @@ class Solution(object):
             if freq_diff[i] != 0:
                 return False
         return True
+
+#REVISION
+'''
+242. valid anagram
+time memory beats 74%, 25%
+'''
+
+
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        s = s.lower()
+        t = t.lower()
+
+        diff_list = [0] * 26
+        for i in s:
+            idx = ord(i) - ord("a")
+            diff_list[idx] += 1
+        for i in t:
+            idx = ord(i) - ord("a")
+            diff_list[idx] -= 1
+        for i in diff_list:
+            if i != 0:
+                return False
+        return True
+
+        
