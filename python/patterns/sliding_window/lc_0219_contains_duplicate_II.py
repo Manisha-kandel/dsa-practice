@@ -30,9 +30,15 @@ class Solution(object):
         return False
 
 
-
-
-        
+'''Better soln by chatGPT: just my idea but better execution with less redundancy'''
+class Solution(object):
+    def containsNearbyDuplicate(self, nums, k):
+        last = {}
+        for i, x in enumerate(nums):
+            if x in last and i - last[x] <= k:
+                return True
+            last[x] = i
+        return False
 
 
 
