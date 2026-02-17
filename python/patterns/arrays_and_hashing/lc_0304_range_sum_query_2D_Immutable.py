@@ -9,9 +9,29 @@ class NumMatrix(object):
         :type matrix: List[List[int]]
         """
         '''
-        THINK IN TERMS OF REGION, WHICH ARE ADDED, it's similar how you think in PIE(principle of inclusion exclusion) problems. and remember that the prefix matrix has 1 extra row and col each, so think in terms of that new prefix matrix while using the arguments you get as row1, col1, row2, and col2. 
+        THINK IN TERMS OF REGION, WHICH ARE ADDED, it's similar how you think in PIE(principle of inclusion exclusion) problems. 
+	Remember that the prefix matrix has 1 extra row and col each, so think in terms of that new prefix matrix while using the arguments you get as row1, col1, row2, and col2. 
         Think in terms of PIE while creating prefix matrix, and while returning the sumRegion values.
-        '''
+        
+	[[3, 0, 1, 4, 2], 
+     	[5, 6, 3, 2, 1], 
+     	[1, 2, 0, 1, 5], 
+     	[4, 1, 0, 1, 7], 
+     	[1, 0, 3, 0, 5]]
+
+
+	[
+	[0, 0, 0, 0, 0, 0], 
+	[0, 3, 3, 4, 8, 10], 
+	[0, 8, 14, 18, 24, 27], 
+	[0, 9, 17, 21, 28, 36], 
+	[0, 13, 22, 26, 34, 49], 
+	[0, 14, 23, 30, 38, 58]
+	]
+	'''
+
+
+
         self.matrix = matrix
         # self.prefix = np.zeros_like(self.matrix)
         if not matrix or not matrix[0]:
