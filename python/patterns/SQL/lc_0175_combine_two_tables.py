@@ -1,0 +1,16 @@
+'''
+175. Combine Two Tables
+'''
+# Write your MySQL query statement below
+
+-- SELECT
+-- FROM
+-- WHERE
+-- GROUP BY 
+-- HAVING 
+-- ORDER BY
+
+SELECT p.firstName, p.lastName, a.city, a.state
+FROM Person p
+LEFT JOIN Address a
+ON p.personId = a.personId;

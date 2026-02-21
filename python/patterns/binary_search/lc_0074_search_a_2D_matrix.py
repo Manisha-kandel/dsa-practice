@@ -10,9 +10,9 @@ class Solution(object):
         :rtype: bool
         """
         #we have a m*n matrix, where values keep increasing in each col downwards and each row rightwards. 
-        #can use maybe use (m+n) range, while that happens, do binary sort s.t. the index we want for an k in that range is [k//m][k%m]. 
+        #can use maybe use (m*n) range, while that happens, do binary sort s.t. the index we want for an k in that range is [k//m][k%m]. 
         #continue binary search till we find the value, 
-        #logic being if target is lower, go leftwards in the range (m+n), if target is higher, fo rightwards in the range(m+n)
+        #logic being if target is lower, go leftwards in the range (m*n), if target is higher, fo rightwards in the range(m+n)
         m, n = len(matrix), len(matrix[0])
 
         l,r = 0, m*n
