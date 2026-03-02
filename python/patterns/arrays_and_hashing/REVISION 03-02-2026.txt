@@ -1,0 +1,105 @@
+REVISION:
+
+1929. Concatenation of Array - 1 minute
+class Solution:
+    def getConcatenation(self, nums: List[int]) -> List[int]:
+        ans = nums
+        ans.extend(nums[:])
+
+        return ans
+
+217. Contains Duplicate - 1 minute
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        hashSet = set()
+
+        for n in nums:
+            if n in hashSet:
+                return True
+            else:
+                hashSet.add(n)
+
+        return False
+
+
+1. Two Sum  - 3 mintues
+
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        hashmap = {}
+
+        for i, num in enumerate(nums):
+            k = target - num
+            if k in hashmap:
+                return [hashmap[k], i]
+            else:
+                hashmap[num] = i
+        
+        return []
+
+
+242. Valid Anagram - 5 minutes
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        #given s 
+        #given t
+
+        #two loops to keep count of the letters
+        s = s.lower()
+        t = t.lower()
+        count = [0]*26
+
+        #add to count in corresponding index as we see characters
+        for ch in s:
+            idx = ord(ch) - ord("a")
+            count[idx] += 1
+        print(count)
+        
+        #subtract from count in corresponding index as we see characters
+        for ch in t:
+            idx = ord(ch) - ord("a")
+            count[idx] -= 1
+        print(count)
+
+        #if all counts are same, at the end, all entries should be 0, else return False
+        for i in range(26):
+            if count[i] != 0:
+                return False
+        
+        return True
+        
+
+14. Longest Common Prefix  - 3 minutes or so (sorting hint from last revision with GPT)
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        #we will sort the strs for ease
+        # print(strs)
+        strs = sorted(strs)      #(O(loe(n)))
+        n = len(strs)
+        # print(strs)
+        res = ""
+        for i, ch in enumerate(strs[0]):
+            if ch == strs[n-1][i]:
+                res += ch
+            else:
+                return res
+        
+        return res
+
+49. Group Anagrams - 10 minutes 
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        #use the sorted of the strs as keys, and keep appending them in the values, which is a list. 
+        #at the end, return the values from the hashmap
+        hashmap = {}
+        for word in strs:
+            key = tuple(sorted(word))     #list can't be a key to hashmap, so tuple()
+            # print(key, word)
+            if key in hashmap:
+                hashmap[key].append(word)
+            else:
+                hashmap[key] = [word]
+        
+        return list(hashmap.values())
+
+
