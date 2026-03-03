@@ -103,3 +103,90 @@ class Solution:
         return list(hashmap.values())
 
 
+REVISION: 
+27. Remove Element - 2 minutes
+class Solution:
+    def removeElement(self, nums: List[int], val: int) -> int:
+        #given nums
+        #given val --> remove all val in nums in place. 
+        #return # elements != val, i.e. return len(nums) at last
+
+        n = len(nums)
+        i = 0
+        while i < n:
+            if nums[i] == val:
+                del nums[i]
+            else:
+                i += 1
+            n = len(nums)
+
+        return len(nums)
+
+
+169. Majority Element
+class Solution: 
+    def majorityElement(self, nums: List[int]) -> int:
+        #given nums of size n
+        n = len(nums)
+        count = {}
+        for num in nums:
+            count[num] = count.get(num, 0) + 1
+            if count[num] > n // 2:
+                return num
+
+
+705. Design HashSet
+class MyHashSet:
+
+    def __init__(self):
+        self.hashset = set()
+
+    def add(self, key: int) -> None:
+        self.hashset.add(key)
+
+    def remove(self, key: int) -> None:
+        if key in self.hashset:
+            self.hashset.remove(key)
+
+    def contains(self, key: int) -> bool:
+        return key in self.hashset
+
+
+# Your MyHashSet object will be instantiated and called as such:
+# obj = MyHashSet()
+# obj.add(key)
+# obj.remove(key)
+# param_3 = obj.contains(key)
+
+
+
+706. Design HashMap
+class MyHashMap:
+
+    def __init__(self):
+        self.hashmap = dict()
+
+    def put(self, key: int, value: int) -> None:
+        self.hashmap[key] = value
+
+    def get(self, key: int) -> int:
+        if key in self.hashmap:
+            return self.hashmap[key]
+        else:
+            return -1
+
+    def remove(self, key: int) -> None:
+        if key in self.hashmap:
+            del self.hashmap[key]
+
+
+# Your MyHashMap object will be instantiated and called as such:
+# obj = MyHashMap()
+# obj.put(key,value)
+# param_2 = obj.get(key)
+# obj.remove(key)
+
+
+
+
+
