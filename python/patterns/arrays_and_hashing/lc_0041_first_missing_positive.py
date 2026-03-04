@@ -1,28 +1,49 @@
 '''
-41. First Missing POsitive
+41. First Missing Positive
+
+Goal:
+Find the smallest missing positive integer in O(n) time and O(1) extra space.
+
+Key idea:
+Use the array itself as a hash table.
+Mark presence of values 1..n by adding a constant "base" to the index (value-1).
+
+Important:
+If we use modulo, DO NOT use % n because value == n would become 0.
+Use base = n+1 for both:
+- marking (add base)
+- recovering original (num % base)
+- checking (value < base means "not marked")
 '''
+
 class Solution:
     def firstMissingPositive(self, nums: List[int]) -> int:
         n = len(nums)
-        #remove numbers(make them 0) greather than n, in the array nums
+        base = n + 1  # base used for marking + modulo + threshold checks
+
+        # 1) Clean the array:
+        # Replace invalid values (<=0 or >n) with 0 because we only care about 1..n.
         for i in range(n):
-            if nums[i] >= n or nums[i] < 0:
+            if nums[i] <= 0 or nums[i] > n:
                 nums[i] = 0
 
-        #increase the indices by n, when corresponding number is found in the array     
-        #indices start from 1 to n. (positive numbers)
-        for j, num in enumerate(nums):
-            num = num % n          #to get the already increased by n (or 2n, or 3n) values to what it originally was, we use the modulo operator.
-            nums[num-1] = nums[num-1] + n
-        
-        #check for missing indices
-        #that is the required first positive missing number. 
-        for k, num in enumerate(nums):
-            if num < n:
-                return k+1
+        # 2) Mark presence:
+        # For each value v in [1..n], add 'base' to nums[v-1].
+        # We use v % base to recover the original value even if nums[i] was already increased.
+        for num in nums:
+            num = num % base        # recover original value in range [0..n]
+            if num == 0:
+                continue            # 0 means invalid originally, skip
+            nums[num - 1] += base   # mark that 'num' exists
 
-        #if the smallest is n, we reach the end of the array.
-        return n
+        # 3) Find the first index that was never marked:
+        # If nums[i] < base, then (i+1) was never seen.
+        for i in range(n):
+            if nums[i] < base:
+                return i + 1
+
+        # 4) If all 1..n are present, answer is n+1.
+        return n + 1
 
 
 

@@ -33,7 +33,6 @@ class NumMatrix(object):
 
 
         self.matrix = matrix
-        # self.prefix = np.zeros_like(self.matrix)
         if not matrix or not matrix[0]:
             self.prefix = [[0]]
             return

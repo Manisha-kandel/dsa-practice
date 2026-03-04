@@ -34,3 +34,18 @@ class Solution(object):
                 i += 1
 
         return profit[-1]
+
+'''
+pretty easy soln from revision
+'''
+
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        #think of it as a graph, we need to find the rising part and keep adding that rise, that's all
+        profit = 0
+        for i in range(1, len(prices)):
+            diff = prices[i] - prices[i-1]
+            if diff > 0:
+                profit += diff
+
+        return profit
