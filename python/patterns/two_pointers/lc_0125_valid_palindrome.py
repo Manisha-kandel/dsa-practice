@@ -1,5 +1,29 @@
 '''125. Valid Palindrome'''
 
+#Best solution of all
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        n = len(s)-1
+        l, r = 0, n
+        s = s.lower()
+        # print(s)
+
+        while l < r:
+            while not s[l].isalnum() and l < n:
+                l += 1
+            while not s[r].isalnum() and r >= 0:
+                r -= 1
+            
+            if s[l] == s[r]:
+                l += 1
+                r -= 1
+            else:
+                return False
+        
+        return True
+
+
+
 '''Solution 1: time beats 47%, space beats 88%'''
 
 class Solution(object):
