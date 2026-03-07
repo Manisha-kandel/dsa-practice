@@ -23,3 +23,28 @@ class Solution:
             return False
         return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)     #core concept: if both left subtrees and right subtrees are equal, then only trees are same, got stuck here for long time. 
         
+
+'''
+Same concept but Slightly different soln
+'''
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+        #Base cases
+        if p and not q: return False
+        elif not p and q: return False
+        elif not p and not q: return True
+
+        #return root equal && left equal && right equal
+        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right) and (p.val == q.val)
+
+        
+
+
+        

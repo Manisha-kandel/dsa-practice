@@ -64,4 +64,31 @@ class Solution:
 
         return height(root) != -1
 
+'''NEATLY WRITTEN'''
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def isBalanced(self, root):
+        def height(node):
+            #base case 1
+            if not node:
+                return 0
+
+            left_h = height(node.left)
+            right_h = height(node.right)
+            
+            #propagate imbalance: if imbalanced, return height as -1 
+            if left_h == -1 or right_h == -1 or abs(left_h - right_h) > 1: return -1
+
+            #return height
+            return 1 + max(left_h, right_h)  #THE RECURSION
+
+        return height(root) != -1
+
+        
         

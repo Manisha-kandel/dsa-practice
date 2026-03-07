@@ -1,34 +1,28 @@
-'''
-144. Binary Preorder Traversal
-time, memory beats 100%, 95%
-'''
-
+REVISION
+-----------------------------------------------------------------------------
+94. Binary Tree Inorder Traversal - 2 + 3 minutes
 # Definition for a binary tree node.
-# class TreeNode(object):
+# class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
 #         self.val = val
 #         self.left = left
 #         self.right = right
-class Solution(object):
-    def preorderTraversal(self, root):
-        """
-        :type root: Optional[TreeNode]
-        :rtype: List[int]
-        """
-        #base cases
-        preorder = []
+class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        inorder = []
+        #base case
         if not root:
-            return preorder
-        
-        preorder.append(root.val)
-        leftBranch = self.preorderTraversal(root.left)
-        preorder.extend(leftBranch)
-        rightBranch = self.preorderTraversal(root.right)
-        preorder.extend(rightBranch)
-        
-        return preorder
+            return inorder
 
-'''neater version'''
+        inorder.extend(self.inorderTraversal(root.left))
+        inorder.append(root.val)
+        inorder.extend(self.inorderTraversal(root.right))
+
+        return inorder
+
+
+-----------------------------------------------------------------------------
+144. Binary Tree Preorder Traversal - 2 minutes (with pretext of inorder done just now)
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -47,4 +41,3 @@ class Solution:
         preorder.extend(self.preorderTraversal(root.right))
 
         return preorder
-        
