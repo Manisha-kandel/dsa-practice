@@ -245,7 +245,180 @@ class Solution:
         #return root equal && left equal && right equal
         return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right) and (p.val == q.val)
 -----------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
+235. Lowest Common Ancestor of a Binary Search Tree - 2 + 10 + 5 minutes
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
 
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        #both on different sides
+        if not root: return None
+        elif p.val <= root.val < q.val or q.val <= root.val < p.val: return root
+        #p or q equal to root also taken care of here
+        elif p.val == root.val or q.val == root.val: return root
+        #both on left
+        elif p.val < root.val and q.val < root.val: return self.lowestCommonAncestor(root.left, p, q)
+        #both on right
+        else: return self.lowestCommonAncestor(root.right, p, q)
+
+
+-----------------------------------------------------------------------------------------------
+572. Subtree of Another Tree - 10 + 10 minutes
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+        def isIdentical(root, subRoot):
+            if not root and not subRoot: return True
+            elif not root or not subRoot: return False
+            else:
+                return (root.val == subRoot.val) and isIdentical(root.left, subRoot.left) and isIdentical(root.right, subRoot.right)
+
+        #see if root == subRoot, if not found search in root's left and right
+        if not subRoot: return True
+        elif not root: return False
+        elif isIdentical(root, subRoot): return True
+        else:
+            return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot) 
+-----------------------------------------------------------------------------------------------
+
+96. Unique Binary Search Trees - 3 + 3 minutes
+class Solution:
+    def numTrees(self, n: int) -> int:
+        #catalan numbers is the number of structurally unique BST's there are
+        c = [0] * (n+1)
+        c[0] = c[1] = 1
+
+        for i in range(2, n+1):
+            for j in range(0, i):
+                c[i] += c[j] * c[i-j-1]
+
+        return c[n]
+
+-----------------------------------------------------------------------------------------------
+101. Symmetric Tree - 3 + 5 minutes
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isSymmetric(self, root: Optional[TreeNode]) -> bool:
+        def isMirror(l, r):
+            if not l and not r: return True   #both none
+            elif not l or not r: return False #one none
+            elif l.val != r.val: return False  #not equal l and r
+            else:                              #equal
+                return isMirror(l.left, r.right) and isMirror(l.right, r.left)
+        
+        if not root: return True
+        elif not root.left and not root.right: return True
+        else:
+            return isMirror(root.left, root.right) 
+        
+
+-----------------------------------------------------------------------------------------------
+102. Binary Tree Level Order Traversal - 10 minutes
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+from collections import deque
+class Solution:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        #we use queue for Level order traversal
+        res = []
+
+        if not root:
+            return res
+
+        q = deque([])
+        q.append(root)
+        
+        while q:
+            level = []
+            n = len(q)
+            for i in range(n):
+                node = q.popleft()
+                level.append(node.val)
+                if node.left: q.append(node.left)
+                if node.right: q.append(node.right)
+            res.append(level)
+
+        return res
+
+
+-----------------------------------------------------------------------------------------------
+
+111. Minimum Depth of Binary Tree - 15 minutes
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def minDepth(self, root):
+        """
+        :type root: Optional[TreeNode]
+        :rtype: int
+        """
+        #let's 
+        if not root: return 0
+        q = deque([])
+        q.append(root)
+        level = 1
+
+        while q:
+            size = len(q)
+            # print(q)
+            for i in range(size):
+                node = q.popleft()
+                print(node.val)
+                if not node.left and not node.right: return level
+                else:     #either or both present
+                    if node.left: q.append(node.left)
+                    if node.right: q.append(node.right) 
+            # print(q)
+            level += 1
+
+
+-----------------------------------------------------------------------------------------------
+112. Path Sum - 5 minutes
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
+        #a recursion for sure
+        if not root: return False  #no root, no sum possible
+        if not root.left and not root.right: return (targetSum == root.val) #if on leaf, if the targetSum == the leaf value
+
+        #keep checking on both sides updating the targetSum values accordingly
+        return self.hasPathSum(root.left, targetSum - root.val) or self.hasPathSum(root.right, targetSum - root.val)
+
+
+-----------------------------------------------------------------------------------------------
+
+
+
+-----------------------------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------
 
