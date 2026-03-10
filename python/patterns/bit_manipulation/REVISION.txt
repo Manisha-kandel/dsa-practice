@@ -28,3 +28,53 @@ class Solution:
         return res
 
 ----------------------------------------------------------
+--------------------------------------------------------
+231. Power of Two
+class Solution:
+    def isPowerOfTwo(self, n: int) -> bool:
+        cnt = 0
+        
+        while n > 0:
+            cnt += (n&1)
+            n = n>>1
+            
+            if cnt > 1:
+                return False
+        return cnt == 1
+
+Simpler soln: 
+class Solution:
+    def isPowerOfTwo(self, n: int) -> bool:
+        if n <= 0: return False
+        return n&(n-1) == 0
+
+
+--------------------------------------------------------
+268. Missing Number - 3 mins 
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        res = 0
+
+        #xor numbers from 0 through n
+        for n in range(len(nums)+1):   
+            res = res^n
+
+        #xor all numbers in nums       
+        for n in nums:    
+            res = res^n
+        
+        return res
+
+
+--------------------------------------------------------
+338. Counting bits - 8 minutes
+class Solution:
+    def countBits(self, n: int) -> List[int]:
+        cb=[0]
+        while len(cb)<=n:
+            cb.extend([i+1 for i in cb])   #extend array with it's own size everytime, increasing every existing element with 1 for the extension half | since 2^n to 2^(n+1) - 1, show the same pattern as the 0 to 2^n - 1, just adding each by 1. 
+        return cb[:n+1]
+--------------------------------------------------------
+
+
+--------------------------------------------------------
