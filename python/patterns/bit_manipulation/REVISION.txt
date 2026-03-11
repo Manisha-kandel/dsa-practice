@@ -76,5 +76,72 @@ class Solution:
         return cb[:n+1]
 --------------------------------------------------------
 
+------------------------------------------------------------
+201. Bitwise AND of Numbers Range - 5 minutes
+class Solution(object):
+    def rangeBitwiseAnd(self, left, right):
+        """
+        :type left: int
+        :type right: int
+        :rtype: int
+        """
 
+        shift = 0
+
+        while left != right:
+            left = left>>1
+            right = right>>1
+            shift += 1
+        
+        return left<<shift
+
+
+------------------------------------------------------------
+342. Power of Four - 6 minutes
+class Solution:
+    def isPowerOfFour(self, n: int) -> bool:
+        cnt = 0
+
+        while n > 0:
+            cnt += (n&1)
+            if (n>>1)&1 == 1: return False #if the bit in between of desired places is 1, return False (not a power of 4)
+            if cnt > 1: return False
+            n = n>>2
+        
+        return cnt == 1
+
+------------------------------------------------------------
+461. Hamming Distance -3 minutes
+class Solution:
+    def hammingDistance(self, x: int, y: int) -> int:
+        num = x^y
+
+        cnt = 0
+        while num:
+            cnt += num&1
+            num = num>>1
+        return cnt
+------------------------------------------------------------
+476. Number Complement - 5 minutes
+class Solution:
+    def findComplement(self, num: int) -> int:
+        ln = num.bit_length()
+        mask = (1<<ln) - 1
+        return num^mask
+
+------------------------------------------------------------
+693. Binary Number with Alternating Bits - 5 minutes
+class Solution(object):
+    def hasAlternatingBits(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
+        x = n^(n>>1)
+        return x&(x+1) == 0 
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
 --------------------------------------------------------
