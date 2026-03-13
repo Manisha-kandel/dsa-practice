@@ -1,0 +1,71 @@
+REVISION - STACK
+-------------------------------------------------------------
+20. Valid Parentheses - 10 minutes
+class Solution:
+    def isValid(self, s: str) -> bool:
+        #'(', ')', '{', '}', '[', ']'
+        if len(s)%2 == 1: return False
+
+        stack = []
+        o = ['(', '{', '[']
+        c = [')', '}', ']']
+        for ch in s:
+            if ch in o:
+                stack.append(ch)
+            else:
+                if not stack: return False
+                if ch == ')':
+                    if stack[-1] == '(': stack.pop()
+                    else: return False
+
+                if ch == '}':
+                    if stack[-1] == '{': stack.pop()
+                    else: return False
+
+                if ch == ']':
+                    if stack[-1] == '[': stack.pop()
+                    else: return False
+
+        return not stack  #empty stack == valid parentheses
+-------------------------------------------------------------
+225. Implement Stack using Queues - 20 minutes
+class MyStack:
+
+    def __init__(self):
+        self.stack = deque()
+
+    def push(self, x: int) -> None:
+        #pushing need to ensure LIFO, do this with 2 steps, add, then rotate to bring it to the front
+        self.stack.append(x)   #add to the last
+        self.stack.rotate(1)   #bring the added thing to the front.  
+
+    def pop(self) -> int:
+        return self.stack.popleft()
+
+    def top(self) -> int:
+        return self.stack[0]
+
+    def empty(self) -> bool:
+        return not self.stack
+
+
+# Your MyStack object will be instantiated and called as such:
+# obj = MyStack()
+# obj.push(x)
+# param_2 = obj.pop()
+# param_3 = obj.top()
+# param_4 = obj.empty()
+
+-------------------------------------------------------------
+
+
+-------------------------------------------------------------
+
+
+-------------------------------------------------------------
+
+
+-------------------------------------------------------------
+
+
+-------------------------------------------------------------
