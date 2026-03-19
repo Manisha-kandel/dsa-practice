@@ -1,0 +1,67 @@
+REVISION SLIDING WINDOW
+----------------------------------------------------------------------
+567. Permutation in String - 15+10 minutes
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        if len(s2) < len(s1): return False
+
+        count1 = {}
+        count2 = {}
+        Matches = 0
+
+        #initiate count1 and count2
+        for i in range(ord("a"), ord("z")+1):
+            count1[chr(i)] = 0
+            count2[chr(i)] = 0
+
+        #populate s1 count
+        for ch in s1:
+            count1[ch] += 1
+        
+        #populate s2 till length of s1
+        for ch in s2[:len(s1)]:
+            count2[ch] += 1
+        
+        for i in range(ord("a"), ord("z")+1):
+            if count1[chr(i)] == count2[chr(i)]:
+                Matches += 1
+
+        if Matches == 26: return True 
+        
+        l = 0
+        for r in range(len(s1), len(s2)):    #looks odd as window length seems to be len(s1) + 1, but this way, we are ensuring Matches is always counted for window of len(s1).  
+            if Matches == 26: return True
+
+            inn = s2[r]    #the new to be added to make s1 length window
+            out = s2[l]    #the old to be deleted to maintain s1 length window
+
+            count2[inn] += 1
+            #sth here
+            if count2[inn] == count1[inn]: Matches += 1
+            elif count2[inn] - 1 == count1[inn]: Matches -= 1
+
+
+            count2[out] -= 1
+            #sth here
+            if count2[out] == count1[out]: Matches += 1
+            elif count2[out] + 1 == count1[out]: Matches -= 1
+
+            l += 1
+
+        return Matches == 26
+
+----------------------------------------------------------------------
+
+
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+
+
+----------------------------------------------------------------------
+
+
+----------------------------------------------------------------------
+        
