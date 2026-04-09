@@ -1,0 +1,24 @@
+
+--------------------------------------------------------------------
+215. Kth Largest Element in an Array - 5 minutes
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        #we maintain minHeap of length k by popping from heap when len > k, then give the heappop() when the heap creation is done for the array(as the largest k elements are in the heap and the top of the heap is the smalles of them as it is a minHeap). 
+
+        minHeap = []
+        heapq.heapify(minHeap)
+
+        for num in nums:
+            heapq.heappush(minHeap, num)
+
+            if len(minHeap) > k:
+                heapq.heappop(minHeap)
+        
+        return heapq.heappop(minHeap)
+
+
+--------------------------------------------------------------------
+
+
+
+--------------------------------------------------------------------
