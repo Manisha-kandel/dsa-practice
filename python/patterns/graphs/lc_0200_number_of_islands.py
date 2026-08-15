@@ -57,3 +57,43 @@ for r in range(ROWS):
             islands += 1
             dfs(r, c)
 '''
+
+#Another attempt
+#200. Number of Islands
+
+class Solution(object):
+    def numIslands(self, grid):
+        """
+        :type grid: List[List[str]]
+        :rtype: int
+        """
+        #state: a cell when visited if it was already counted in any island considered, it will be in set, and hence not to be counted in future
+        #traversal rule: go to all the sides from 1 cell wherever there is 1
+        #guards: within the grid, and also only consider new cells which weren't considered earlier
+        #hand-trace: 
+
+        visit = set()
+        islands = 0
+        m = len(grid)
+        n = len(grid[0])
+
+        def dfs(i,j):
+            directions = [1,0], [0,1], [-1,0], [0,-1]
+            if i>=0 and j>=0 and i<m and j<n:
+                visit.add((i,j))
+                for drn in directions:
+                    r,c = i+drn[0], j+drn[1]
+                    if (r>=0 and c>=0 and r<m and c<n) and (grid[r][c] == "1" and (r,c) not in visit):
+                        dfs(r,c)
+                        visit.add((r,c)) 
+            return 
+
+
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == "1":
+                    if (i,j) not in visit:
+                        dfs(i,j)
+                        islands += 1
+        
+        return islands
