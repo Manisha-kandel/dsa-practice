@@ -1,0 +1,8 @@
+DYNAMIC PROGRAMMING: 
+----------------------
+state: what dp[i] represents? 
+recurrence: enumerate every possible last choice, and relate dp[current] to dp[smaller] through each one | dp[i] = dp[..] 
+base case: dp[0] = 0 (the smallest state(s) whereyou know answer withoutany recurrence at all)
+sentinel: only relevant when some states can be genuinely impossible to reach (Coin Change: some amounts can't be made). It's the placeholder fill value, and it has to sit on the losing side of every comparison — bigger than any real answer if you're minimizing, so it never gets picked by mistake. Min Cost Climbing Stairs didn't need one at all, because every step is always reachable — no such thing as "impossible" there.
+guards: guard conditions, for coins problems it was if i <= coin:
+hand-trace: trace the smalles hand-countable case before debugging further

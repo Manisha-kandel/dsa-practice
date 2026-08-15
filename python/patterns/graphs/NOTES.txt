@@ -1,0 +1,6 @@
+GRAPH TRAVERSAL:
+-------------------
+State — what does a "visited" cell mean here, and what are you actually counting?
+Traversal rule — at any given cell, what are your neighbor choices, and what's the stopping condition that keeps this from running forever?
+Guards — what has to be true about a cell before you're allowed to step into it?
+Hand-trace — smallest grid you can trace on your fingers.
